@@ -14,9 +14,10 @@ class Vgg19:
             path = inspect.getfile(Vgg19)
             path = os.path.abspath(os.path.join(path, os.pardir))
             path = os.path.join(path, "vgg19.npy")
+            print(path)
             vgg19_npy_path = path
 
-        self.data_dict = np.load(vgg19_npy_path, encoding='latin1').item()
+        self.data_dict = np.load(vgg19_npy_path, encoding='latin1', allow_pickle=True).item()
 
     def build(self, rgb):
         """
@@ -28,12 +29,12 @@ class Vgg19:
         rgb_scaled = rgb * 255.0
 
         # Convert RGB to BGR
-        red, green, blue = tf.split(3, 3, rgb_scaled)
-        bgr = tf.concat(3, [
+        red, green, blue = tf.split(rgb_scaled, 3, 3)
+        bgr = tf.concat([
             blue - VGG_MEAN[0],
             green - VGG_MEAN[1],
             red - VGG_MEAN[2],
-        ])
+        ], 3)
         self.conv1_1 = self.conv_layer(bgr, "conv1_1")
         self.conv1_2 = self.conv_layer(self.conv1_1, "conv1_2")
         self.pool1 = self.avg_pool(self.conv1_2, 'pool1')

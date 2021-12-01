@@ -144,7 +144,7 @@ min_loss, best_image = float("inf"), None
 for i in xrange(0,500):
     image, loss, _ = sess.run([output_image, overall_loss, train])
     if i % 5 == 0:
-        print 'Iteration {}: {}'.format(i, loss)
+        print('Iteration {}: {}'.format(i, loss))
         if(loss < min_loss):
             min_loss, best_image = loss, image
 
