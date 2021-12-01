@@ -1,3 +1,4 @@
+# It's a forked from janivanecky. Test for my dataset.
 # Artistic-Style
 
 Very simple implementation of Neural Algorithm of the Artistic Style (Gatys <i>et al.</i> - http://arxiv.org/abs/1508.06576) in Tensorflow. 
